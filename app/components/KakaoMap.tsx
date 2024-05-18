@@ -55,6 +55,8 @@ const KakaoMap = () => {
       .then(({ address, roadAddress }) => {
         // 도로명 주소가 있으면 그 값을, 없으면 지번 주소를 사용
         const finalAddress = roadAddress || address;
+        console.log(address);
+        console.log(roadAddress);
         setClickPositionAddress(finalAddress);
       })
       .catch((error) => {
@@ -99,14 +101,14 @@ const KakaoMap = () => {
   return (
     <div>
       <Map
-        className="w-full h-[600px]"
+        className="w-full h-[500px]"
         id="map"
         center={location.center}
         level={6}
         onCreate={setMap}
         onClick={handleClickReport}
       >
-        <div className="absolute left-1/2 top-4 z-10 flex w-4/5 max-w-lg -translate-x-1/2 transform items-center justify-center rounded-md bg-background p-1 shadow-md">
+        <div className="absolute left-1/2 top-20 z-10 flex w-4/5 max-w-lg -translate-x-1/2 transform items-center justify-center rounded-md bg-background p-1 shadow-md">
           <input
             type="text"
             placeholder="장소 검색"
@@ -145,7 +147,10 @@ const KakaoMap = () => {
         <MapTypeControl position="BOTTOMLEFT" />
         <ZoomControl position="RIGHT" />
       </Map>
-      <div>{coord}</div>
+      <div>
+        <p className="py-2">주소: {clickPositionAddress}</p>
+        <p>{coord}</p>
+      </div>
     </div>
   );
 };
