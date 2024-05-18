@@ -101,14 +101,14 @@ const KakaoMap = () => {
   return (
     <div>
       <Map
-        className="w-full h-[500px]"
+        className="relative w-full h-[500px]"
         id="map"
         center={location.center}
         level={6}
         onCreate={setMap}
         onClick={handleClickReport}
       >
-        <div className="absolute left-1/2 top-20 z-10 flex w-4/5 max-w-lg -translate-x-1/2 transform items-center justify-center rounded-md bg-background p-1 shadow-md">
+        <div className="absolute left-1/2 top-40 z-10 flex w-4/5 max-w-lg -translate-x-1/2 transform items-center justify-center rounded-md bg-background p-1 shadow-md">
           <input
             type="text"
             placeholder="장소 검색"

@@ -1,14 +1,30 @@
+import { FaMapMarkedAlt } from "react-icons/fa";
+import Footer from "./components/Footer";
 import KakaoMap from "./components/KakaoMap";
+import Navigation from "./components/Navigation";
 
 export default function Home() {
   return (
-    <main className="p-5">
-      <div>
-        <h1 className="text-xl font-semibold pb-4">
-          지도로 주소, 위도 경도 찾기
-        </h1>
+    <main>
+      <div className="p-5">
+        <Navigation />
+        <div className="mb-4">
+          <div className="flex gap-2 items-center">
+            <FaMapMarkedAlt className="text-sky-500" size={24} />
+            <p className="text-xl font-medium py-4">
+              지도로 원하는 주소, 위도 경도 찾기
+            </p>
+          </div>
+          <div>
+            <p>
+              장소 검색으로 원하는 위치로 이동한 후 지도를 클릭하면 해당 위치에
+              마커가 생성되고 주소와 위도, 경도 정보를 알 수 있습니다.
+            </p>
+          </div>
+        </div>
+        <KakaoMap />
       </div>
-      <KakaoMap />
+      <Footer />
     </main>
   );
 }
