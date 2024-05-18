@@ -44,9 +44,8 @@ const KakaoMap = () => {
     const lat = latlng.getLat();
     const lng = latlng.getLng();
     setCoord(
-      `클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다`
+      `클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다.`
     );
-    console.log(coord);
     setPosition({
       lat,
       lng,
@@ -55,8 +54,6 @@ const KakaoMap = () => {
       .then(({ address, roadAddress }) => {
         // 도로명 주소가 있으면 그 값을, 없으면 지번 주소를 사용
         const finalAddress = roadAddress || address;
-        console.log(address);
-        console.log(roadAddress);
         setClickPositionAddress(finalAddress);
       })
       .catch((error) => {
@@ -99,59 +96,44 @@ const KakaoMap = () => {
   };
 
   return (
-    <div>
-      <Map
-        className="relative w-full h-[500px]"
-        id="map"
-        center={location.center}
-        level={6}
-        onCreate={setMap}
-        onClick={handleClickReport}
-      >
-        <div className="absolute left-1/2 top-40 z-10 flex w-4/5 max-w-lg -translate-x-1/2 transform items-center justify-center rounded-md bg-background p-1 shadow-md">
-          <input
-            type="text"
-            placeholder="장소 검색"
-            className="flex-grow rounded-md border-0 p-2 focus:outline-none focus:ring-0"
-            value={searchKeyword}
-            onChange={handleSearchChange}
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            aria-label="Search"
-            type="button"
-            onClick={handleSearch}
-            className="ml-2 mr-2 flex h-full items-center justify-center rounded-md focus:outline-none"
-          >
-            <IoSearchSharp
-              size={20}
-              className="text-gray-400 hover:text-black"
-            />
-          </button>
-        </div>
-        {position && (
-          <>
-            <MapMarker position={position} clickable />
-            <CustomOverlayMap
-              key={`overlay__${position.lat}-${position.lng}`}
-              position={position}
-              yAnchor={2.6}
-              xAnchor={0.67}
-            >
-              <div className="ml-12 flex items-center rounded border-1 border-primary bg-white px-2 py-1 text-sm font-medium text-black shadow-sm">
-                spot
-              </div>
-            </CustomOverlayMap>
-          </>
-        )}
-        <MapTypeControl position="BOTTOMLEFT" />
-        <ZoomControl position="RIGHT" />
-      </Map>
-      <div>
-        <p className="py-2">주소: {clickPositionAddress}</p>
-        <p>{coord}</p>
+    <>
+      <div className="bg-white z-10 flex sm:w-full items-center justify-center rounded-md bg-background p-1 shadow-lg mb-4">
+        <input
+          type="text"
+          placeholder="장소 검색"
+          className="flex-grow rounded-md border-0 p-2 focus:outline-none focus:ring-0"
+          value={searchKeyword}
+          onChange={handleSearchChange}
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          aria-label="Search"
+          type="button"
+          onClick={handleSearch}
+          className="ml-2 mr-2 flex h-full items-center justify-center rounded-md focus:outline-none"
+        >
+          <IoSearchSharp size={24} className="text-sky-500 hover:text-black" />
+        </button>
       </div>
-    </div>
+      <div>
+        <Map
+          className="relative w-full h-[500px]"
+          id="map"
+          center={location.center}
+          level={6}
+          onCreate={setMap}
+          onClick={handleClickReport}
+        >
+          {position && <MapMarker position={position} />}
+          <MapTypeControl position="BOTTOMLEFT" />
+          <ZoomControl position="RIGHT" />
+        </Map>
+        <div className="mt-2">
+          <p className="py-2">주소: {clickPositionAddress}</p>
+          <p>{coord}</p>
+        </div>
+      </div>
+    </>
   );
 };
 

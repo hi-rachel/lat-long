@@ -5,7 +5,7 @@ import Navigation from "./components/Navigation";
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-y-scroll">
       <div className="p-5">
         <Navigation />
         <div className="mb-4">
