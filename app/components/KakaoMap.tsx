@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Map,
   MapMarker,
@@ -68,7 +70,6 @@ const KakaoMap = () => {
       searchKeyword,
       (data: any, status: any) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          console.log(data);
           const firstResult = data[0];
           if (firstResult) {
             const { x, y } = firstResult;
@@ -81,9 +82,10 @@ const KakaoMap = () => {
             map.panTo(kakaoPosition);
           }
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
-          alert("검색 결과가 존재하지 않습니다.");
+          toast.warn("검색 결과가 존재하지 않습니다.");
+          //   alert("검색 결과가 존재하지 않습니다.");
         } else if (status === window.kakao.maps.services.Status.ERROR) {
-          alert("검색 결과 중 오류가 발생했습니다.");
+          toast.error("검색 중 오류가 발생했습니다.");
         }
       },
       { location: map.getCenter() }
@@ -100,8 +102,9 @@ const KakaoMap = () => {
     if (text) {
       try {
         await navigator.clipboard.writeText(text);
-        alert(`${text} 복사되었습니다.`);
+        toast.success(`${text} 복사되었습니다.`);
       } catch (copyError) {
+        toast.error("복사 중 오류가 발생했습니다.");
         console.error("복사 중 오류 발생:", copyError);
       }
     }
@@ -111,8 +114,9 @@ const KakaoMap = () => {
     if (position) {
       try {
         await navigator.clipboard.writeText(position.toString());
-        alert(`${position} 복사되었습니다.`);
+        toast.success(`${position} 복사되었습니다.`);
       } catch (copyError) {
+        toast.error("복사 중 오류가 발생했습니다.");
         console.error("복사 중 오류 발생:", copyError);
       }
     }
@@ -151,6 +155,7 @@ const KakaoMap = () => {
           <MapTypeControl position="BOTTOMLEFT" />
           <ZoomControl position="RIGHT" />
         </Map>
+        <ToastContainer />
         <div className="mt-2">
           <div
             className="py-2 cursor-pointer"
