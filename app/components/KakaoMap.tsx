@@ -6,7 +6,6 @@ import {
   MapMarker,
   MapTypeControl,
   ZoomControl,
-  CustomOverlayMap,
 } from "react-kakao-maps-sdk";
 import { getAddressFromCoords } from "@/utils/getUserLocation";
 import { IoSearchSharp } from "react-icons/io5";
@@ -36,7 +35,7 @@ const KakaoMap = () => {
   const [clickPositionAddress, setClickPositionAddress] = useState<string>("");
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-  const handleClickReport = (
+  const handleClickMap = (
     _: kakao.maps.Map,
     mouseEvent: MouseEventWithLatLng
   ) => {
@@ -73,10 +72,16 @@ const KakaoMap = () => {
       searchKeyword,
       (data: any, status: any) => {
         if (status === window.kakao.maps.services.Status.OK) {
+          console.log(data);
           const firstResult = data[0];
           if (firstResult) {
             const { x, y } = firstResult;
+            setPosition({
+              lat: y,
+              lng: x,
+            });
             const kakaoPosition = new window.kakao.maps.LatLng(y, x);
+
             map.panTo(kakaoPosition);
           }
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
@@ -122,7 +127,7 @@ const KakaoMap = () => {
           center={location.center}
           level={6}
           onCreate={setMap}
-          onClick={handleClickReport}
+          onClick={handleClickMap}
         >
           {position && <MapMarker position={position} />}
           <MapTypeControl position="BOTTOMLEFT" />
