@@ -6,7 +6,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "위도, 경도 찾기",
+  title: "지도로 원하는 주소, 위도 경도 찾기",
   description: "위도, 경도 찾기 사이트",
 };
 

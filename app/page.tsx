@@ -6,8 +6,8 @@ import Navigation from "./components/Navigation";
 export default function Home() {
   return (
     <main className="overflow-y-scroll">
+      <Navigation />
       <div className="p-5">
-        <Navigation />
         <div className="mb-4">
           <div className="flex gap-2 items-center">
             <FaMapMarkedAlt className="text-sky-500" size={24} />
