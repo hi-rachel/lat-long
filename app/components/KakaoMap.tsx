@@ -21,8 +21,7 @@ export interface MouseEventWithLatLng {
 
 const KakaoMap = () => {
   const [map, setMap] = useState<any>();
-  const [coord, setCoord] = useState("");
-  const [location, setLocation] = useState({
+  const [initialLocation, setInitialLocation] = useState({
     center: {
       lat: 37.5737,
       lng: 127.0484,
@@ -42,9 +41,6 @@ const KakaoMap = () => {
     const latlng = mouseEvent.latLng;
     const lat = latlng.getLat();
     const lng = latlng.getLng();
-    setCoord(
-      `클릭한 위치의 위도는 ${latlng.getLat()} 이고, 경도는 ${latlng.getLng()} 입니다.`
-    );
     setPosition({
       lat,
       lng,
@@ -100,6 +96,28 @@ const KakaoMap = () => {
     }
   };
 
+  const handleCopyAddress = async (text: string) => {
+    if (text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        alert(`${text} 복사되었습니다.`);
+      } catch (copyError) {
+        console.error("복사 중 오류 발생:", copyError);
+      }
+    }
+  };
+
+  const handleCopyLatLng = async (position: number) => {
+    if (position) {
+      try {
+        await navigator.clipboard.writeText(position.toString());
+        alert(`${position} 복사되었습니다.`);
+      } catch (copyError) {
+        console.error("복사 중 오류 발생:", copyError);
+      }
+    }
+  };
+
   return (
     <>
       <div className="bg-white z-10 flex sm:w-full items-center justify-center rounded-md bg-background p-1 shadow-lg mb-4">
@@ -124,7 +142,7 @@ const KakaoMap = () => {
         <Map
           className="relative w-full h-[500px]"
           id="map"
-          center={location.center}
+          center={initialLocation.center}
           level={6}
           onCreate={setMap}
           onClick={handleClickMap}
@@ -134,8 +152,46 @@ const KakaoMap = () => {
           <ZoomControl position="RIGHT" />
         </Map>
         <div className="mt-2">
-          <p className="py-2">주소: {clickPositionAddress}</p>
-          <p>{coord}</p>
+          <div
+            className="py-2 cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              handleCopyAddress(clickPositionAddress);
+            }}
+          >
+            <p>주소: {clickPositionAddress}</p>
+          </div>
+          <div className="py-2">
+            {position && (
+              <p>
+                클릭한 위치의 위도는{" "}
+                <span
+                  id="latitude"
+                  className="cursor-pointer"
+                  tabIndex={0}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCopyLatLng(position.lat);
+                  }}
+                >
+                  {position.lat}
+                </span>{" "}
+                이고, 경도는{" "}
+                <span
+                  id="longitude"
+                  className="cursor-pointer"
+                  tabIndex={0}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCopyLatLng(position.lng);
+                  }}
+                >
+                  {position.lng}
+                </span>{" "}
+                입니다.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </>
