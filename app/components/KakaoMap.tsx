@@ -11,6 +11,7 @@ import {
 } from "react-kakao-maps-sdk";
 import { getAddressFromCoords } from "@/utils/getUserLocation";
 import { IoSearchSharp } from "react-icons/io5";
+import { MdOutlineClose } from "react-icons/md";
 
 export interface LatLng {
   getLat: () => number;
@@ -65,6 +66,11 @@ const KakaoMap = () => {
   const handleSearch = () => {
     if (!map) return;
 
+    if (searchKeyword === "") {
+      toast.info("검색어를 입력해주세요.");
+      return;
+    }
+
     const ps = new window.kakao.maps.services.Places();
     ps.keywordSearch(
       searchKeyword,
@@ -83,13 +89,16 @@ const KakaoMap = () => {
           }
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
           toast.warn("검색 결과가 존재하지 않습니다.");
-          //   alert("검색 결과가 존재하지 않습니다.");
         } else if (status === window.kakao.maps.services.Status.ERROR) {
           toast.error("검색 중 오류가 발생했습니다.");
         }
       },
       { location: map.getCenter() }
     );
+  };
+
+  const handleClearSearchKeyword = () => {
+    setSearchKeyword("");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -128,16 +137,27 @@ const KakaoMap = () => {
         <input
           type="text"
           placeholder="장소 검색"
-          className="flex-grow rounded-md border-0 p-2 focus:outline-none focus:ring-0"
+          className="flex-grow rounded-md border-0 p-2 focus:ring-0"
           value={searchKeyword}
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
         />
         <button
+          aria-label="Clear"
+          type="button"
+          onClick={handleClearSearchKeyword}
+          className="ml-2 mr-2 p-1 flex h-full items-center justify-center rounded-full bg-gray-100"
+        >
+          <MdOutlineClose
+            size={16}
+            className="text-gray-500 hover:text-black"
+          />
+        </button>
+        <button
           aria-label="Search"
           type="button"
           onClick={handleSearch}
-          className="ml-2 mr-2 flex h-full items-center justify-center rounded-md focus:outline-none"
+          className="ml-2 mr-2 flex h-full items-center justify-center rounded-md"
         >
           <IoSearchSharp size={24} className="text-sky-500 hover:text-black" />
         </button>
