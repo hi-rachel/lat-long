@@ -1,7 +1,7 @@
-import { FaMapMarkedAlt } from "react-icons/fa";
 import Footer from "./components/Footer";
 import KakaoMap from "./components/KakaoMap";
 import Navigation from "./components/Navigation";
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <div className="p-5">
         <div className="mb-4">
           <div className="flex gap-2 items-center">
-            <FaMapMarkedAlt className="text-sky-500" size={24} />
+            <FaMapMarkedAlt className="text-slate-700" size={24} />
             <p className="text-xl font-medium py-4">
               지도로 원하는 주소, 위도 경도 찾기
             </p>

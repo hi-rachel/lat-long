@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { FaMagnifyingGlassLocation } from "react-icons/fa6";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -23,7 +24,13 @@ const Navigation = () => {
 
   return (
     <div className="p-5 pb-0 flex gap-14 text-lg font-bold mb-2 border-b border-gray">
-      <div>Spot Logo</div>
+      <div className="flex gap-2 text-sky-500">
+        <div className="mt-1">
+          <FaMagnifyingGlassLocation size={22} />
+        </div>
+        <div>Find Spot</div>
+      </div>
+
       <div className="flex gap-6">
         {links.map((link) => (
           <Link
