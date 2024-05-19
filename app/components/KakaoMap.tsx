@@ -78,11 +78,12 @@ const KakaoMap = () => {
         if (status === window.kakao.maps.services.Status.OK) {
           const firstResult = data[0];
           if (firstResult) {
-            const { x, y } = firstResult;
+            const { x, y, address_name, road_address_name } = firstResult;
             setPosition({
               lat: y,
               lng: x,
             });
+            setClickPositionAddress(address_name || road_address_name);
             const kakaoPosition = new window.kakao.maps.LatLng(y, x);
 
             map.panTo(kakaoPosition);
