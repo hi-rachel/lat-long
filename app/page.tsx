@@ -5,7 +5,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <main className="overflow-y-scroll">
+    <main>
       <Navigation />
       <div className="p-5">
         <div className="mb-4">
