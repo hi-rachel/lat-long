@@ -23,12 +23,12 @@ const Navigation = () => {
   ];
 
   return (
-    <div className="p-5 pb-0 flex gap-14 text-lg font-bold mb-2 border-b border-gray">
+    <div className="p-5 pb-0 flex gap-14 font-bold mb-2 border-b border-gray">
       <div className="flex gap-2 text-sky-500">
         <div className="mt-1">
-          <FaMagnifyingGlassLocation size={22} />
+          <FaMagnifyingGlassLocation aria-label="Find Spot" size={22} />
         </div>
-        <div>Find Spot</div>
+        <div className="hidden md:block text-lg">Find Spot</div>
       </div>
 
       <div className="flex gap-6">
@@ -44,7 +44,7 @@ const Navigation = () => {
                 activeLink === link.href ? "border-b-2 border-sky-500" : ""
               }  `}
             >
-              <div className="hover:bg-gray-200 hover:rounded-md mb-1 p-1">
+              <div className="hover:bg-gray-200 hover:rounded-md mb-1 p-1 text-md md:text-lg text-wrap">
                 {link.label}
               </div>
             </div>
