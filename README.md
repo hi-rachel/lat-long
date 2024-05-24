@@ -7,7 +7,7 @@
 <br />
 
 <p align="middle">
-  <img width="500px"  src="https://github.com/hi-rachel/lat-long/assets/103404125/fe3e276e-ca6c-45a8-969d-ff9c9fac0844">
+  <img width="600px"  src="https://github.com/hi-rachel/lat-long/assets/103404125/2cb0209d-0f09-468f-a331-9165e5cf9f86">
 </p>
 
 ## 🗣️ 왜 만들었나요?
