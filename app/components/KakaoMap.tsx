@@ -178,22 +178,24 @@ const KakaoMap = () => {
         </Map>
         <ToastContainer />
         <div className="mt-2">
-          <div
-            className="py-2 cursor-pointer"
+          주소:{" "}
+          <span
+            id="address"
+            className="py-2 cursor-pointer text-sky-600"
             onClick={(e) => {
               e.preventDefault();
               handleCopyAddress(clickPositionAddress);
             }}
           >
-            <p>주소: {clickPositionAddress}</p>
-          </div>
+            {clickPositionAddress}
+          </span>
           <div className="py-2">
             {position && (
               <p>
                 클릭한 위치의 위도는{" "}
                 <span
                   id="latitude"
-                  className="cursor-pointer"
+                  className="cursor-pointer text-sky-600"
                   tabIndex={0}
                   onClick={(e) => {
                     e.preventDefault();
@@ -205,14 +207,14 @@ const KakaoMap = () => {
                 이고, 경도는{" "}
                 <span
                   id="longitude"
-                  className="cursor-pointer"
+                  className="cursor-pointer text-sky-600"
                   tabIndex={0}
                   onClick={(e) => {
                     e.preventDefault();
                     handleCopyLatLng(position.lng);
                   }}
                 >
-                  {position.lng}
+                  {position.lat}
                 </span>{" "}
                 입니다.
               </p>
