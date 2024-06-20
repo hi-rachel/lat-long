@@ -22,6 +22,11 @@ export default function RootLayout({
           strategy="beforeInteractive"
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services,clusterer`}
         />
+        <meta
+          name="google-site-verification"
+          content="gPP7sY1hto9tigiWfmR9RgG3B7_Ts2S-SLsfxt5X-Xo"
+        />
+        ;
       </head>
       <body className={inter.className}>{children}</body>
     </html>
