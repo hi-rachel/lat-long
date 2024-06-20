@@ -28,7 +28,7 @@ const Navigation = () => {
         <div className="mt-1">
           <FaMagnifyingGlassLocation aria-label="Find Spot" size={22} />
         </div>
-        <div className="hidden md:block text-lg">Find Spot</div>
+        <div className="hidden md:block text-lg text-sky-800">Find Spot</div>
       </div>
 
       <div className="flex gap-6">
