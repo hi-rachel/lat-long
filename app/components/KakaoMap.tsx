@@ -214,7 +214,7 @@ const KakaoMap = () => {
                     handleCopyLatLng(position.lng);
                   }}
                 >
-                  {position.lat}
+                  {position.lng}
                 </span>{" "}
                 입니다.
               </p>
